@@ -133,7 +133,12 @@ body {
   padding: 5px 12px; border-radius: 20px; cursor: pointer;
   transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
   text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; justify-content: center; min-height: 40px; box-sizing: border-box;
+  /* min-height 40px : le max compatible avec les 56px de la topbar tout en gardant une marge visuelle propre ;
+     zone tactile complétée à 44px via le pseudo-élément ci-dessous */
+  position: relative;
 }
+.tbtn::before { content:''; position:absolute; inset:-2px; }
 .tbtn:hover { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.3); }
 .tbtn:active { transform: scale(.96); }
 .tbtn.red { background: rgba(255,255,255,0.07); }
@@ -342,7 +347,8 @@ body {
   position: sticky; top: 0; background: var(--surface); border-radius: 18px 18px 0 0; z-index: 1;
 }
 .modal-head h2 { font-family: 'Cormorant Garamond', serif; font-size:1.25rem; color: var(--c1); }
-.modal-close { background: none; border: none; font-size:1.375rem; cursor: pointer; color: var(--mu); line-height: 1; padding: 4px; }
+.modal-close { background: none; border: none; font-size:1.375rem; cursor: pointer; color: var(--mu); line-height: 1; padding: 4px; position: relative; }
+.modal-close::before { content:''; position:absolute; inset:-11px; /* zone tactile 44x44 min, visuel inchangé */ }
 .modal-body { padding: var(--sp-5) var(--sp-6) var(--sp-6); }
 
 /* Message groupé WhatsApp : premier écran (rédaction) en Bordeaux,
@@ -1753,7 +1759,7 @@ body .animate, body .spinner, body [class*="anim"] {
 .qz-ev { font-size:0.75rem;font-weight:600;color:var(--mu);display:flex;align-items:center;gap:5px;margin-bottom:11px; }
 .qz-ev.qz-unassigned { color:var(--c3);font-weight:700; }
 .qz-fiches { display:flex;flex-direction:column;gap:7px; }
-.qz-toggle { margin-top:2px;background:none;border:none;color:var(--c1);font-size:0.6875rem;font-weight:700;cursor:pointer;padding:2px 0; }
+.qz-toggle { margin-top:2px;background:none;border:none;color:var(--c1);font-size:0.6875rem;font-weight:700;cursor:pointer;padding:12px 0;position:relative; }
 
 /* ── Board par zone (onglet Équipes) — colonnes Non confié / Confié.
    Chaque zone porte sa propre identité chromatique forte : barre en
@@ -1789,7 +1795,8 @@ body .animate, body .spinner, body [class*="anim"] {
   .zone-col:last-child { border-bottom:none; }
 }
 
-.btn-icon { background:none; border:none; cursor:pointer; font-size:0.9375rem; padding:4px 6px; border-radius:6px; opacity:.7; }
+.btn-icon { background:none; border:none; cursor:pointer; font-size:0.9375rem; padding:4px 6px; border-radius:6px; opacity:.7; position:relative; }
+.btn-icon::before { content:''; position:absolute; inset:-9px; /* zone tactile 44x44 min, visuel inchangé */ }
 .btn-icon:hover { opacity:1; background:var(--bg2); }
 .btn-mic { position:absolute; right:8px; bottom:8px; width:30px; height:30px; border-radius:50%; border:1.5px solid var(--bo); background:var(--surface); cursor:pointer; font-size:0.875rem; display:flex; align-items:center; justify-content:center; transition:all .15s; }
 .btn-mic::before { content:''; position:absolute; inset:-7px; /* zone tactile 44x44 min, visuel inchangé */ }
